@@ -9,12 +9,9 @@
 			var GV, CHT, DT, OPT;
 	
 			function drawChart(){
-			
 			    GV = google.visualization;
-			
 			    //Create DataTable Object
 			    DT = new GV.DataTable();
-			
 			    //Add Two Columns
 			    DT.addColumn({
 			        type : "string",
@@ -30,7 +27,6 @@
 			        label : "MARKS",
 					role : "annotation"
 			    });
-			
 			    //Add Multiple Rows
 			    DT.addRows( [
 			        [ "Physics", 88, "Great" ],
@@ -40,24 +36,32 @@
 			        [ "English", 89, "Like It" ],
 			        [ "Arabic", 98, "Wow" ]
 			    ] );
-			
 			    //Create Options
 			    OPT = {
-			        title : "MARKS REPORT",
-			        legend : "bottom",
-			        height : 400,
-					//Modify Default Config For Annotations
+			        title	: "MARKS REPORT",
+			        legend	: "bottom",
+			        height	: 400,
+					vAxis	: {
+						format	: "currency", // none - decimal - scientific - currency - short - long - percent
+					},
+					bar : {
+						groupWidth : "25%" //Increase or Reduce the width of bars
+					},
+					axisTitlesPosition : "out", // in - out  - none
+					hAxis : {	//Modifiy Horizontal Axis
+						title : "Subjects", //Specifiy a title
+						
+					},
+					vAxis : {
+						title : "Marks Obtained"
+					},
 					annotations : {
-						//Annotation to be placed outside the bars
 						alwaysOutside : true,
-						//If Inside the Bar then it should be clear
 						highContrast : true
 					}
 			    };
-			
 			    //Create a Column chart and assign a DIV element via ID
 			    CHT = new GV.ColumnChart( document.getElementById("MY_CHART") );
-			
 			    //Draw the Chart by passing DT (DataTable) and OPT (Options)
 			    CHT.draw( DT, OPT );
 			}	
@@ -76,12 +80,11 @@
 			$(document).on( "click", "#PRINT_BTN", function(){
 				//Get Chart Image URI ( Base64 )
 				var IMG_URI = CHT.getImageURI();
-
 				//Pass the Base64 content to the PrintJS library function to print it
 				printJS({
 					printable : IMG_URI,
 					type : "image",
-					header : "BASIC COLUMN CHART WITH ANNOTATIONS"
+					header : "COLUMN CHART AXES ( vAxis & hAxis )"
 				});
 			} );
 		</script>
@@ -113,17 +116,21 @@
 							C o l u m n &nbsp; C h a r t
 						</a>
 						<a class="w3-bar-item w3-padding-small w3-text-gray">
-							B a s i c &nbsp; C h a r t &nbsp; w i t h &nbsp; A n n o t a t i o n
+							B a s i c &nbsp; C h a r t &nbsp; A X E S
 						</a>
 					</div>
 
 					<br/>
 					
+					<div class="w3-bar w3-white w3-padding-small w3-border-bottom">
+						<div class="w3-bar-item">
+							Column Chart Customizing Axes
+						</div>
+						<button class="w3-bar-item w3-button w3-red w3-round-small w3-right" id="PRINT_BTN">
+							Print Chart &#128438;
+						</button>
+					</div>
 					<div id="MY_CHART" class="w3-white" style="width:100%;height:400px"></div>
-					<br/>
-					<button class="w3-button w3-white w3-round-small w3-right" id="PRINT_BTN">
-						Print Chart &#128438;
-					</button>
 
 					<br/><br/>
 
