@@ -1,0 +1,121 @@
+<html>
+	<head>
+	
+		<link href="/css/w3.css" rel="stylesheet" />
+		<link href="/css/print.min.css" rel="stylesheet" />
+
+		<script>
+			//Declaring Global Variables
+			var GV, CHT, DT, OPT;
+	
+			function drawChart(){
+			
+			    GV = google.visualization;
+			
+			    //Create DataTable Object
+			    DT = new GV.DataTable();
+			
+			    //Add Two Columns
+			    DT.addColumn({
+			        type : "string",
+			        label : "SUBJECTS"
+			    });
+			    DT.addColumn({
+			        type : "number",
+			        label : "MARKS"
+			    });
+			
+			    //Add Multiple Rows
+			    DT.addRows( [
+			        [ "Physics", 88 ],
+			        [ "Chemistry", 65 ],
+			        [ "Mathematics", 96 ],
+			        [ "Computer", 99 ],
+			        [ "English", 89 ],
+			        [ "Arabic", 98 ]
+			    ] );
+			
+			    //Create Options
+			    OPT = {
+			        title : "MARKS REPORT",
+			        legend : "bottom",
+			        height : 400
+			    };
+			
+			    //Create a Column chart and assign a DIV element via ID
+			    CHT = new GV.ColumnChart( document.getElementById("MY_CHART") );
+			
+			    //Draw the Chart by passing DT (DataTable) and OPT (Options)
+			    CHT.draw( DT, OPT );
+			}	
+		</script>
+		<script src="https://www.gstatic.com/charts/loader.js"></script>
+		<script>
+			//Load the core chart library
+			google.charts.load( "current", { packages : ["corechart"] } );
+			//Assign a callback function to be executed when corechart loads successfully
+			google.charts.setOnLoadCallback( drawChart );
+		</script>
+		<script src="/js/jq.js"></script>
+		<script src="/js/print.min.js"></script>
+		<script>
+			//Attach Event to the Print Button
+			$(document).on( "click", "#PRINT_BTN", function(){
+				//Get Chart Image URI ( Base64 )
+				var IMG_URI = CHT.getImageURI();
+
+				//Pass the Base64 content to the PrintJS library function to print it
+				printJS({
+					printable : IMG_URI,
+					type : "image",
+					header : "BASIC COLUMN CHART"
+				});
+			} );
+		</script>
+
+	</head>
+	<body class="w3-red">
+		
+		<div class="w3-container w3-padding-24 w3-font-osw">
+
+			
+			<div class="w3-row">
+				<div class="w3-col l2 m2"><br/></div>
+				<div class="w3-col l8 m8">
+
+					<div class="w3-bar w3-xlarge w3-wide">
+						<a href="index.html" class="w3-bar-item w3-button">
+							&#10096;
+						</a>
+						<div class="w3-bar-item w3-padding-12">
+							GOOGLE CHARTS
+						</div>
+					</div>
+
+					<div class="w3-bar w3-small w3-white w3-round-small ">
+						<a href="/googleCharts/" class="w3-bar-item w3-padding-small w3-button w3-border-right w3-opacity-min">
+							G O O G L E &nbsp;  C h a r t s
+						</a>
+						<a href="/googleCharts/Column_Chart/" class="w3-bar-item w3-padding-small w3-button w3-border-right w3-opacity-min">
+							C o l u m n &nbsp; C h a r t
+						</a>
+						<a class="w3-bar-item w3-padding-small w3-text-gray">
+							B a s i c &nbsp; C h a r t
+						</a>
+					</div>
+
+					<br/>
+					
+					<div id="MY_CHART" class="w3-white" style="width:100%;height:400px"></div>
+					<br/>
+					<button class="w3-button w3-white w3-round-small" id="PRINT_BTN">
+						Print Chart &#128438;
+					</button>
+
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+</html>
