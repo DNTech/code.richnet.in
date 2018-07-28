@@ -24,22 +24,35 @@
 			        type : "number",
 			        label : "MARKS"
 			    });
+				//Column for annotation
+			    DT.addColumn({
+			        type : "string",
+			        label : "MARKS",
+					role : "annotation"
+			    });
 			
 			    //Add Multiple Rows
 			    DT.addRows( [
-			        [ "Physics", 88 ],
-			        [ "Chemistry", 65 ],
-			        [ "Mathematics", 96 ],
-			        [ "Computer", 99 ],
-			        [ "English", 89 ],
-			        [ "Arabic", 98 ]
+			        [ "Physics", 88, "Great" ],
+			        [ "Chemistry", 65, "Hate it" ],
+			        [ "Mathematics", 96, "Love It" ],
+			        [ "Computer", 99, "My Life" ],
+			        [ "English", 89, "Like It" ],
+			        [ "Arabic", 98, "Wow" ]
 			    ] );
 			
 			    //Create Options
 			    OPT = {
 			        title : "MARKS REPORT",
 			        legend : "bottom",
-			        height : 400
+			        height : 400,
+					//Modify Default Config For Annotations
+					annotations : {
+						//Annotation to be placed outside the bars
+						alwaysOutside : true,
+						//If Inside the Bar then it should be clear
+						highContrast : true
+					}
 			    };
 			
 			    //Create a Column chart and assign a DIV element via ID

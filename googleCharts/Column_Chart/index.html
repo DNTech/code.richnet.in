@@ -7,6 +7,31 @@
 		<script src="/gstatic/loader.js"></script>
 		<script src="/js/jq.js"></script>
 		<script src="/js/print.min.js"></script>
+		<script>
+			$(function(){
+				var MENUS = [
+					{title : "Basic Column Chart", desc : "Basic Column Chart with single column", href : "basic_column_chart.html"},
+					{title : "Annotations In Column Chart", desc : "Basic Column Chart with Annotation", href : "basic_column_chart_annotation.html"},
+					{title : "Basic Column Chart", desc : "Basic Column Chart with single column", href : "basic_column_chart.html"},
+					{title : "Basic Column Chart", desc : "Basic Column Chart with single column", href : "basic_column_chart.html"},
+					{title : "Basic Column Chart", desc : "Basic Column Chart with single column", href : "basic_column_chart.html"}
+				];
+				var ind = 0;
+				MENUS.map( x => {
+					ind++;
+					$("#MENUS").append(`
+							<a href="${x.href}" class="w3-button w3-bar-item w3-border-bottom">
+								${ind}. ${x.title} 
+								<b class="w3-right w3-xlarge">&#10097;</b>
+								<small class="w3-block w3-opacity-min">
+									${x.desc}
+								</small>
+							</a>
+					`);
+					return x;
+				} );
+			})
+		</script>
 
 	</head>
 	<body class="w3-red">
@@ -27,26 +52,7 @@
 					</div>
 					<br/><br/>
 					<div class="w3-padding-small w3-round w3-white w3-large">
-						<div class="w3-bar-block">
-							<a href="basic_column_chart.html" class="w3-button w3-bar-item">
-								01. BASIC CHART
-								<b class="w3-right w3-xlarge">&#10097;</b>
-								<small class="w3-block w3-opacity-min">
-									Basic column chart using simple DataTable
-								</small>
-							</a>
-							<a href="column_chart.html" class="w3-button w3-bar-item">
-								PIE CHART
-								<b class="w3-right">&#10097;</b>
-							</a>
-							<a href="column_chart.html" class="w3-button w3-bar-item">
-								GAUGE CHART
-								<b class="w3-right">&#10097;</b>
-							</a>
-							<a href="column_chart.html" class="w3-button w3-bar-item">
-								CALENDAR CHART
-								<b class="w3-right">&#10097;</b>
-							</a>
+						<div class="w3-bar-block" id="MENUS">
 						</div>
 					</div>
 				</div>
