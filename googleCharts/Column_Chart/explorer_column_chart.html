@@ -7,7 +7,6 @@
 		<script>
 			//Declaring Global Variables
 			var GV, CHT, DT, OPT;
-	
 			function drawChart(){
 			    GV = google.visualization;
 			    //Create DataTable Object
@@ -38,53 +37,30 @@
 			    ] );
 			    //Create Options
 			    OPT = {
-			        title	: "MARKS REPORT",
-			        legend	: "bottom",
-			        height	: 400,
-					explorer : {
-						actions : ["dragToZoom", "rightClickToReset"],
-						maxZoomIn : 0.05
-					},
-					vAxis	: {
-						minorGridlines : {
-							count : 19
-						},
-						gridlines : {
-							count : 20
-						},
-						textStyle : {
-							fontSize : 10
-						},
-						title : "Marks Scored",
-						titleTextStyle : {
-							fontName : "Oswald",
-							italic : false,
-							color : "#990000"
-						},
-						viewWindow : {
-							min : 50,
-							max : 110
-						}
-					},
-					hAxis : {
-						textPosition : "out",
-						direction : -1,
-						showEveryText : 7,
-						viewWindow : {
-							min : 0
-						},
-						slantedText : true
-					},
+			        title : "MARKS REPORT",
+			        legend : "bottom",
+			        height : 400,
 					annotations : {
-						alwaysOutside : true,
+						alwaysOutside : true
 					},
-					legend : "none"
+					explorer : {
+						//The type of action based on user event
+						actions : ["dragToZoom", "rightClickToReset"],
+						//users won't pan beyond the original chart
+						keepInBounds : false,
+						//Lets the user zoom in to a specific limit
+						maxZoomIn : 0.4,
+						//Let the user zoom out to a specific limit
+						maxZoomOut : 10,
+						//determines how much they zoom by. The smaller the number, the smoother and slower the zoom.
+						zoomDelta : 1.5
+					}
 			    };
 			    //Create a Column chart and assign a DIV element via ID
 			    CHT = new GV.ColumnChart( document.getElementById("MY_CHART") );
 			    //Draw the Chart by passing DT (DataTable) and OPT (Options)
 			    CHT.draw( DT, OPT );
-			}
+			}	
 		</script>
 		<script src="https://www.gstatic.com/charts/loader.js"></script>
 		<script>
@@ -100,11 +76,12 @@
 			$(document).on( "click", "#PRINT_BTN", function(){
 				//Get Chart Image URI ( Base64 )
 				var IMG_URI = CHT.getImageURI();
+
 				//Pass the Base64 content to the PrintJS library function to print it
 				printJS({
 					printable : IMG_URI,
 					type : "image",
-					header : "COLUMN CHART AXES ( vAxis & hAxis )"
+					header : "EXPLORER IN COLUMN CHART"
 				});
 			} );
 		</script>
@@ -135,16 +112,17 @@
 						<a href="/googleCharts/Column_Chart/" class="w3-bar-item w3-padding-small w3-button w3-border-right w3-opacity-min">
 							C o l u m n &nbsp; C h a r t
 						</a>
-						<a class="w3-bar-item w3-padding-small w3-text-gray">
-							B a s i c &nbsp; C h a r t &nbsp; A X E S
+						<a class="w3-bar-item w3-padding-small w3-text-gray w3-wide">
+							Explorer In Column Chart
 						</a>
 					</div>
 
 					<br/>
 					
+					
 					<div class="w3-bar w3-white w3-padding w3-border-bottom">
 						<div class="w3-bar-item">
-							Column Chart Customizing Axes
+							Explorer in Column Chart
 						</div>
 						<button class="w3-bar-item w3-button w3-red w3-round-small w3-right" id="PRINT_BTN">
 							Print Chart &#128438;
@@ -152,11 +130,11 @@
 					</div>
 					<div id="MY_CHART" class="w3-white" style="width:100%;height:400px"></div>
 
-					<br/><br/>
+					<br/>
 
 					<h1>Code</h1>
 					<div class="w3-white">
-						<script src="https://gist.github.com/DNTech/716b6b2aa5992750b003d23caf592f0c.js"></script>
+						<script src="https://gist.github.com/DNTech/26bdc17c4a3b7b6c62f45b8cd3b66fb1.js"></script>
 					</div>
 
 				</div>
